@@ -1,45 +1,82 @@
-import { Formik, Form, Field } from 'formik';
 import {
-    Button,
+    Button, Form
 } from 'react-bootstrap';
+import {AxiosError} from "axios";
+import {useFormik} from 'formik';
 import {useTranslation} from "react-i18next";
+import {useEffect, useRef, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+
+import useAuth from "../../hooks/useAuth";
+import {sendLoginData} from "../../functions/manageAuthData";
+import routes from "../../routes/routes";
 
 const LoginForm = () => {
     const { t } = useTranslation();
+    const { logIn } = useAuth();
+    const inputRef = useRef();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [authFailed, setAuthFailed] = useState(false);
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [inputRef]);
+
+    const formik = useFormik({
+        initialValues: {
+            username: '',
+            password: '',
+        },
+        onSubmit: async (values, { setSubmitting }) => {
+            setAuthFailed(false);
+            try {
+                const {data} = await sendLoginData(values);
+                localStorage.setItem('user', JSON.stringify(data));
+                logIn();
+                const { from } = location.state || { from: { pathname: routes.root }};
+                navigate(from);
+            } catch (error) {
+                setSubmitting(false);
+                if (error instanceof AxiosError && error.response.status === 401) {
+                    setAuthFailed(true);
+                    inputRef.current.select();
+                    return;
+                }
+                throw error;
+            }
+        },
+    });
 
     return (
-        <>
-            <Formik
-                initialValues={{
-                    email: '',
-                    password: '',
-                }}
-                onSubmit={ (values) => {
-                    console.log(values);
-                }}
-            >
-                {() => (
-                    <Form className="w-100">
-                        <div className="form-group mb-3">
-                            <label htmlFor="email">{t('form.nickname')}</label>
-                            <Field
-                                name="email"
-                                className="form-control"
-                            />
-                        </div>
-                        <div className="form-group mb-4">
-                            <label htmlFor="password">{t('form.password')}</label>
-                            <Field
-                                type="password"
-                                name="password"
-                                className="form-control"
-                            />
-                        </div>
-                        <Button variant="outline-primary" className="w-100">{t('form.signInBtn')}</Button>
-                    </Form>
-                )}
-            </Formik>
-        </>
+        <Form onSubmit={formik.handleSubmit} className="w-100">
+            <div className="form-group mb-3">
+                <Form.Control
+                    name="username"
+                    ref={inputRef}
+                    className="form-control"
+                    placeholder={t('form.username')}
+                    onChange={formik.handleChange}
+                    value={formik.values.username}
+                    isInvalid={authFailed}
+                    required
+                />
+            </div>
+            <div className="form-group mb-4">
+                <Form.Control
+                    type="password"
+                    name="password"
+                    className="form-control"
+                    placeholder={t('form.password')}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    isInvalid={authFailed}
+                    required
+                />
+                <Form.Control.Feedback type="invalid" className="mb-4">{t('error.loginFailed')}</Form.Control.Feedback>
+            </div>
+            <Button type="submit" variant="outline-primary" className="w-100">{t('form.signInBtn')}</Button>
+        </Form>
     );
 };
 

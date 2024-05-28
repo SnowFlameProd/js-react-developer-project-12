@@ -12,13 +12,14 @@ export default {
         form: {
             signIn: 'Вход',
             signInBtn: 'Войти',
-            nickname: 'Ваш ник',
+            username: 'Ваш ник',
             password: 'Пароль',
         },
         error: {
             notFound: 'Страница не найдена',
             canGoTo: 'Но вы можете перейти ',
-            mainPage: 'на главную страницу'
+            mainPage: 'на главную страницу',
+            loginFailed: 'Неверные имя пользователя или пароль'
         }
     },
 };
