@@ -1,5 +1,6 @@
 export default {
     root: '/',
     login: '/login',
-    signup: '/signup'
+    signup: '/signup',
+    others: '*',
 }
