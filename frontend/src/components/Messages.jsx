@@ -2,16 +2,15 @@ import {useTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
 import { selectors as messagesSelector } from "../store/slices/messagesSlice";
 import { selectors as channelsSelector } from "../store/slices/channelsSlice";
-import {useEffect} from "react";
-import MessageForm from "./elements/MessageForm";
+import MessageForm from "./forms/MessageForm";
 
 const Messages = () => {
     const { t } = useTranslation();
     const channels = useSelector(channelsSelector.selectAll);
-    const messagesCount = useSelector(messagesSelector.selectTotal);
     const currentChannelId = useSelector((state) => state.ui.currentChannelId);
     const messages = useSelector(messagesSelector.selectAll)
         .filter((msg) => msg.channelId === currentChannelId);
+    const messagesCount = messages.length;
 
     const currentChannel = channels.find((channel) => channel.id === currentChannelId);
 

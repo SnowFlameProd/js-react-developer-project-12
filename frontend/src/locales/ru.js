@@ -10,6 +10,7 @@ const ru ={
             },
             main: {
                 channels: 'Каналы',
+                addChannel: 'Добавить канал',
                 messagesCount: {
                     count_one: '{{count}} сообщение',
                     count_few: '{{count}} сообщения',
@@ -22,13 +23,16 @@ const ru ={
             signInBtn: 'Войти',
             username: 'Ваш ник',
             password: 'Пароль',
-            enterMessage: 'Введите сообщение...'
+            enterMessage: 'Введите сообщение...',
+            cancel: 'Отменить',
+            send: 'Отправить'
         },
         error: {
             notFound: 'Страница не найдена',
             canGoTo: 'Но вы можете перейти ',
             mainPage: 'на главную страницу',
             loginFailed: 'Неверные имя пользователя или пароль',
+            notUnique: 'Должно быть уникальным',
             badConnect: 'Обнаружено плохое соединение'
         }
     },

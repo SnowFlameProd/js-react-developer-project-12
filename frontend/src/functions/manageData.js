@@ -5,6 +5,8 @@ export const sendLoginData = (data) => axios.post(routes.server.login, data);
 
 export const createNewUser = (data) => axios.post(routes.server.signup, data);
 
+createNewUser({ username: 'newuser', password: '123456' });
+
 export const getChannels = (token) => axios.get(routes.server.channels, {
     headers: {
         Authorization: `Bearer ${token}`,

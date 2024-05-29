@@ -3,7 +3,7 @@ import {
 } from 'react-bootstrap';
 
 import { useTranslation } from 'react-i18next';
-import LoginForm from '../elements/LoginForm';
+import LoginForm from '../forms/LoginForm';
 import routes from '../../routes/routes';
 
 import logo from '../../assets/img/login-bg.jpeg';
