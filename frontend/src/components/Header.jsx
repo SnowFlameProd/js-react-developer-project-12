@@ -1,5 +1,5 @@
 import {useTranslation} from "react-i18next";
-import {CardLink} from "react-bootstrap";
+import {Container, Navbar} from "react-bootstrap";
 import routes from "../routes/routes";
 
 const Header = () => {
@@ -7,11 +7,11 @@ const Header = () => {
 
     return (
         <>
-            <nav className="bg-white w-100 py-3 shadow-sm">
-                <div className="container">
-                    <CardLink className="fw-bold h5 mb-0 text-decoration-none" href={routes.root}>{t('header.mainTitle')}</CardLink>
-                </div>
-            </nav>
+            <Navbar className="shadow-sm navbar">
+                <Container>
+                    <Navbar.Brand className="logo" href={routes.root}>{t('header.mainTitle')}</Navbar.Brand>
+                </Container>
+            </Navbar>
         </>
     );
 };

@@ -8,7 +8,7 @@ import {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 
 import useAuth from "../../hooks/useAuth";
-import {sendLoginData} from "../../functions/manageAuthData";
+import {sendLoginData} from "../../functions/manageData";
 import routes from "../../routes/routes";
 
 const LoginForm = () => {

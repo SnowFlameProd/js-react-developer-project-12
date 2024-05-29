@@ -1,10 +1,15 @@
-export default {
+const routes = {
     root: '/',
     login: '/login',
     signup: '/signup',
     others: '*',
     server: {
         login: '/api/v1/login',
-        users: '/api/v1/data',
+        data: '/api/v1/data',
+        signup: '/api/v1/signup',
+        channels: '/api/v1/channels',
+        messages: '/api/v1/messages'
     }
-}
+};
+
+export default routes;

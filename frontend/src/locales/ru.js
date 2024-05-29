@@ -1,4 +1,4 @@
-export default {
+const ru ={
     translation: {
         header: {
             mainTitle: 'Slack Chat By Snowflame'
@@ -7,6 +7,14 @@ export default {
             login: {
                 noAccount: 'Нет аккаунта?',
                 signUp: 'Регистрация',
+            },
+            main: {
+                channels: 'Каналы',
+                messagesCount: {
+                    count_one: '{{count}} сообщение',
+                    count_few: '{{count}} сообщения',
+                    count_many: '{{count}} сообщений',
+                }
             }
         },
         form: {
@@ -14,6 +22,7 @@ export default {
             signInBtn: 'Войти',
             username: 'Ваш ник',
             password: 'Пароль',
+            enterMessage: 'Введите сообщение...'
         },
         error: {
             notFound: 'Страница не найдена',
@@ -23,3 +32,5 @@ export default {
         }
     },
 };
+
+export default ru;

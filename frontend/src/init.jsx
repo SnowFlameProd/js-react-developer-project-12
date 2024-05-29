@@ -4,10 +4,12 @@ import i18next from "i18next";
 import {initReactI18next, I18nextProvider} from "react-i18next";
 import resources from "./locales";
 import AuthProvider from "./providers/authProvider";
+import { Provider } from 'react-redux';
+import store from './store/index';
 
-const init = async () => {
+const init = () => {
     const i18n = i18next.createInstance();
-    await i18n
+    i18n
         .use(initReactI18next)
         .init({
             resources,
@@ -15,13 +17,13 @@ const init = async () => {
         });
 
     return (
-        <AuthProvider>
-            <I18nextProvider i18n={i18n}>
-                <React.StrictMode>
+        <Provider store={store}>
+            <AuthProvider>
+                <I18nextProvider i18n={i18n}>
                     <App />
-                </React.StrictMode>
-            </I18nextProvider>
-        </AuthProvider>
+                </I18nextProvider>
+            </AuthProvider>
+        </Provider>
     );
 };
 
