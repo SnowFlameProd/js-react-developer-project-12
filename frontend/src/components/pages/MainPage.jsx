@@ -14,14 +14,15 @@ import { actions as channelsActions } from '../../store/slices/channelsSlice';
 import { actions as uiActions } from '../../store/slices/uiSlice';
 import Channels from "../Channels";
 import Messages from "../Messages";
+import CustomModal from "../modals/CustomModal";
 
 const MainPage = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const { token } = useSelector(state => state.auth);
 
     useEffect(() => {
         const fetchData = async () => {
-            const { token } = JSON.parse(localStorage.getItem('user'));
             try {
                 const {data: channels} = await getChannels(token);
                 const {data: messages} = await getMessages(token);
@@ -37,6 +38,10 @@ const MainPage = () => {
         fetchData();
     }, [dispatch]);
 
+    const handleClick = () => {
+        dispatch(uiActions.openModal({ type: 'addChannel' }));
+    }
+
     return (
         <Container className="h-100 my-4 overflow-hidden rounded shadow">
             <Row className="row h-100 bg-white flex-md-row">
@@ -44,10 +49,12 @@ const MainPage = () => {
                     <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
                         <b>{t('pages.main.channels')}</b>
 
-                        <Button variant="group-vertical" className="p-0 text-primary">
+                        <Button variant="group-vertical" className="p-0 text-primary" onClick={handleClick}>
                             <PlusSquare size={20} />
                             <span className="visually-hidden">+</span>
                         </Button>
+
+                        <CustomModal/>
                     </div>
 
                     <Channels />

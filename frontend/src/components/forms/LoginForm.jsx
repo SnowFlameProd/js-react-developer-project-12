@@ -33,7 +33,7 @@ const LoginForm = () => {
             try {
                 const {data} = await sendLoginData(values);
                 localStorage.setItem('user', JSON.stringify(data));
-                logIn();
+                logIn(data);
                 const { from } = location.state || { from: { pathname: routes.root }};
                 navigate(from);
             } catch (error) {

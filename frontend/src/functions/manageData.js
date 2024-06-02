@@ -5,8 +5,6 @@ export const sendLoginData = (data) => axios.post(routes.server.login, data);
 
 export const createNewUser = (data) => axios.post(routes.server.signup, data);
 
-createNewUser({ username: 'newuser', password: '123456' });
-
 export const getChannels = (token) => axios.get(routes.server.channels, {
     headers: {
         Authorization: `Bearer ${token}`,
@@ -26,6 +24,18 @@ export const addMessage = (data, token) => axios.post(routes.server.messages, da
 });
 
 export const addChannel = (data, token) => axios.post(routes.server.channels, data, {
+   headers: {
+       Authorization: `Bearer ${token}`,
+   },
+});
+
+export const editChannel = (data, id, token) => axios.patch(`${routes.server.channels}/${id}`, data, {
+   headers: {
+       Authorization: `Bearer ${token}`,
+   },
+});
+
+export const deleteChannel = (id, token) => axios.delete(`${routes.server.channels}/${id}`, {
    headers: {
        Authorization: `Bearer ${token}`,
    },

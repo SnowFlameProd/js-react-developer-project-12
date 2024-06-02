@@ -11,8 +11,8 @@ const MessageForm = () => {
     const { t } = useTranslation();
     const inputRef = useRef();
     const [isSending, setIsSending] = useState(false);
-    const currentChannelId = useSelector((state) => state.ui.currentChannelId);
-    const { username, token } = JSON.parse(localStorage.getItem('user'));
+    const currentChannelId = useSelector(state => state.ui.currentChannelId);
+    const { username, token } = useSelector(state => state.auth);
 
     const formik = useFormik({
         initialValues: {
@@ -30,7 +30,7 @@ const MessageForm = () => {
             } catch (error) {
                 setSubmitting(false);
                 console.log(error);
-                toast.error(t('error.badConnect'));
+                toast(t('error.badConnect'));
             }
         },
     });

@@ -1,17 +1,23 @@
 import AuthContext from "../contexts/authContext";
 import {useMemo, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import { actions as authActions } from "../store/slices/authSlice";
 
 const AuthProvider = ({children}) => {
-    const [loggedIn, setLoggedIn] = useState(() => {
-        const userLoggedIn = localStorage.getItem('user');
-        return !!userLoggedIn;
-    });
+    const dispatch = useDispatch();
+    const { token } = useSelector(state => state.auth);
 
-    const logIn = () => setLoggedIn(true);
+    const [loggedIn, setLoggedIn] = useState(!!token);
+
+    const logIn = (data) => {
+        setLoggedIn(true);
+        dispatch(authActions.login(data));
+    };
 
     const logOut = () => {
         localStorage.removeItem('user');
         setLoggedIn(false);
+        dispatch(authActions.logout());
     }
 
     const context = useMemo(() => ({
