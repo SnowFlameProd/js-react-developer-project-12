@@ -1,7 +1,7 @@
 const ru = {
   translation: {
     header: {
-      mainTitle: 'Slack Chat By Snowflame',
+      mainTitle: 'Hexlet Chat',
       logout: 'Выйти',
     },
     pages: {
@@ -51,7 +51,7 @@ const ru = {
       limited: 'От 3 до 20 символов',
       limitedPassword: 'Не менее 6 символов',
       passwordMatch: 'Пароли должны совпадать',
-      badConnect: 'Обнаружено плохое соединение',
+      badConnect: 'Ошибка соединения',
     },
   },
 };
