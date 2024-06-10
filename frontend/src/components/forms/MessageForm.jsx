@@ -1,4 +1,5 @@
 import {Button, Form} from "react-bootstrap";
+import leoProfanity from 'leo-profanity';
 import { ArrowRightSquare } from 'react-bootstrap-icons';
 import { toast } from 'react-toastify';
 import {useFormik} from "formik";
@@ -14,6 +15,8 @@ const MessageForm = () => {
     const currentChannelId = useSelector(state => state.ui.currentChannelId);
     const { username, token } = useSelector(state => state.auth);
 
+    leoProfanity.add(leoProfanity.getDictionary('ru'));
+
     const formik = useFormik({
         initialValues: {
             body: '',
@@ -24,7 +27,7 @@ const MessageForm = () => {
             }
             setIsSending(true);
             try {
-                await addMessage({body: values.body, channelId: currentChannelId, username}, token);
+                await addMessage({body: leoProfanity.clean(values.body, '*'), channelId: currentChannelId, username}, token);
                 formik.resetForm();
                 setIsSending(false);
             } catch (error) {
