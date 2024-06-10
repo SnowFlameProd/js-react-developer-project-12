@@ -1,4 +1,5 @@
 build:
+	rm frontend/build -rf
 	npm run build
 
 install:
@@ -8,7 +9,10 @@ start-frontend:
 	make -C frontend start
 
 start-backend:
-	npx start-server
+	npm start
+
+local-start:
+	make start-backend & make start-frontend
 
 start:
-	make start-backend & make start-frontend
+	make start-backend
