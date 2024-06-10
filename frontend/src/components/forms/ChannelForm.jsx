@@ -67,11 +67,6 @@ const ChannelForm = ({channelName, mode = 'add'}) => {
         inputRef.current.focus();
     }, []);
 
-    useEffect(() => {
-        console.log(formik.errors);
-        console.log(formik.touched);
-    }, [formik.values.name]);
-
     return (
         <Form onSubmit={formik.handleSubmit}>
             <Form.Control

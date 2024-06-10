@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import Header from "./Header";
-import NotFoundPage from "./pages/NotFoundPage";
-import routes from "../routes/routes";
-import MainPage from "./pages/MainPage";
-import useAuth from "../hooks/useAuth";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
+
+import routes from "../routes/routes";
+import useAuth from "../hooks/useAuth";
 import {initSocket} from "../functions/manageSocket";
+
+import Header from "./Header";
+import LoginPage from './pages/LoginPage';
+import MainPage from "./pages/MainPage";
+import SignUpPage from "./pages/SignUpPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
     const { loggedIn } = useAuth();
@@ -29,6 +32,7 @@ const App = () => {
                     <Route path={routes.root} element={checkAuth()} />
                     <Route path={routes.login} element={<LoginPage />} />
                     <Route path={routes.others} element={<NotFoundPage />} />
+                    <Route path={routes.signup} element={<SignUpPage />} />
                 </Routes>
             </div>
         </BrowserRouter>

@@ -50,12 +50,13 @@ const LoginForm = () => {
 
     return (
         <Form onSubmit={formik.handleSubmit} className="w-100">
+            <h1 className="text-center mb-4">{t('form.signInBtn')}</h1>
             <div className="form-group mb-3">
                 <Form.Control
                     name="username"
                     ref={inputRef}
                     className="form-control"
-                    placeholder={t('form.username')}
+                    placeholder={t('form.login')}
                     onChange={formik.handleChange}
                     value={formik.values.username}
                     isInvalid={authFailed}
