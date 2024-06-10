@@ -1,8 +1,9 @@
 import {Button, Form} from "react-bootstrap";
 import {useTranslation} from "react-i18next";
+import leoProfanity from 'leo-profanity';
 import {useFormik} from "formik";
 import * as yup from 'yup';
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {addChannel, editChannel} from "../../functions/manageData";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
@@ -33,7 +34,7 @@ const ChannelForm = ({channelName, mode = 'add'}) => {
             switch (mode) {
                 case "add":
                     try {
-                        const {data} = await addChannel({ name: values.name }, token);
+                        await addChannel({ name: leoProfanity.clean(values.name, '*') }, token);
                         formik.resetForm();
                         dispatch(uiActions.closeModal());
                         toast.success(t('pages.main.addedSuccess'));
@@ -44,7 +45,7 @@ const ChannelForm = ({channelName, mode = 'add'}) => {
                     break;
                 case "edit":
                     try {
-                        const {data} = await editChannel({ name: values.name }, modal.extra.channelId, token);
+                        await editChannel({ name: leoProfanity.clean(values.name, '*') }, modal.extra.channelId, token);
                         formik.resetForm();
                         dispatch(uiActions.closeModal());
                         toast.success(t('pages.main.editedSuccess'));

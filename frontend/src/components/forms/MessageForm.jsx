@@ -15,8 +15,6 @@ const MessageForm = () => {
     const currentChannelId = useSelector(state => state.ui.currentChannelId);
     const { username, token } = useSelector(state => state.auth);
 
-    leoProfanity.add(leoProfanity.getDictionary('ru'));
-
     const formik = useFormik({
         initialValues: {
             body: '',

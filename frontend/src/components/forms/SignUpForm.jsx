@@ -20,10 +20,6 @@ const SignUpForm = () => {
         inputRef.current.focus();
     }, []);
 
-    useEffect(() => {
-        console.log('123')
-    }, [inputRef.current]);
-
     const formik = useFormik({
         initialValues: {
             username: '',
